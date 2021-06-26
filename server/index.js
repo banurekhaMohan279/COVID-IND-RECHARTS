@@ -39,7 +39,7 @@ app.get("/series", (req, res) => {
 app.get("/data/:series", (req, res) => {
   const series = req.params.series;
   res.send(
-    data.map(row => ({
+    data.slice(-100).map(row => ({
       date: row["Updated On"],
       Dose1: row["First Dose Administered"],
       Dose2: row["Second Dose Administered"],
