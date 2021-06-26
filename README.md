@@ -7,7 +7,7 @@
 <br />
 <p align="center">
 
-  <h3 align="center">Causalens Dashboard</h3>
+  <h3 align="center">COVID INDIA VACCINATION DATA</h3>
 
   <p align="center">
     A dashboard of M/L results
