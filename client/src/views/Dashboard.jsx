@@ -12,14 +12,13 @@ import LineChartComponent from "../components/Charts/LineChart";
 function Dashboard() {
   const [currentSeries, setCurrentSeries] = usePersistedState(
     "currentSeries",
-    "example.X"
+    "India"
   );
-  const [existing, setExisting] = useState([]);
-  const [predicted, setPredicted] = useState([]);
+  const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   let urls = [
-    `http://localhost:3002/data/${currentSeries}`,
-    `http://localhost:3002/results/${currentSeries}`
+    `http://localhost:3002/data/${currentSeries}`
+    //  `http://localhost:3002/results/${currentSeries}`
   ];
 
   useEffect(() => {
@@ -28,17 +27,10 @@ function Dashboard() {
     Promise.all(requests)
       .then(responses => Promise.all(responses.map(r => r.json())))
       .then(results => {
-        setExisting(results[0]);
-        setPredicted(results[1]);
+        setData(results[0]);
         setIsLoading(false);
       });
   }, [currentSeries]);
-
-  /*
-  useEffect(()=>{
-     [existing, isLoading, isError1, doFetch1] = useDataApi(`http://localhost:3002/data/${currentSeries}`,[]);
-     [predicted, isLoading2, isError2, doFetch2] = useDataApi(`http://localhost:3002/results/${currentSeries}`,[]);
-  },[currentSeries]);*/
 
   function LoadData() {
     return (
@@ -46,38 +38,7 @@ function Dashboard() {
         <Row>
           <Col>
             {" "}
-            <LineChartComponent
-              existing={existing}
-              predicted={predicted.predictions}
-              series={currentSeries}
-            />{" "}
-          </Col>
-          <Col>
-            <BarChartComponent
-              featureImportance={predicted.featureImportance}
-            />
-          </Col>
-        </Row>
-        <Row>
-          <Col>
-            <OneDTable
-              heading="Model Details"
-              header={["Property", "Value"]}
-              data={predicted.modelSummary}
-            />
-          </Col>
-          <Col>
-            <OneDTable
-              heading="Scoring Metrics"
-              header={["Metric", "Value"]}
-              data={predicted["scoring_metrics"]}
-            />
-          </Col>
-          <Col>
-            <TwoDTable
-              heading="Confusion Matrix"
-              data={predicted.confusionMetric}
-            />
+            <LineChartComponent data={data} series={currentSeries} />{" "}
           </Col>
         </Row>
       </>

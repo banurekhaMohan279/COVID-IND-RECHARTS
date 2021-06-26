@@ -39,9 +39,13 @@ app.get("/series", (req, res) => {
 app.get("/data/:series", (req, res) => {
   const series = req.params.series;
   res.send(
-    data
-      .slice(2, data.length)
-      .map(row => ({ index: row.index, [series]: row[series] }))
+    data.map(row => ({
+      date: row["Updated On"],
+      Dose1: row["First Dose Administered"],
+      Dose2: row["Second Dose Administered"],
+      Male: row["Male(Individuals Vaccinated)"],
+      Female: row["Female(Individuals Vaccinated)"]
+    }))
   );
 });
 
