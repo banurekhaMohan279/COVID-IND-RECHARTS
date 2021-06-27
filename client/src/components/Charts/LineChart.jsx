@@ -16,7 +16,7 @@ export default function LineChartComponent(props) {
   return (
     <ResponsiveContainer>
       <div className="line-chart-wrapper">
-        <h5> Actual vs Prediction Plot - {series}</h5>
+        <h5> Dose1 & Dose2 Vaccination - {series}</h5>
         <LineChart
           width={400}
           height={400}
