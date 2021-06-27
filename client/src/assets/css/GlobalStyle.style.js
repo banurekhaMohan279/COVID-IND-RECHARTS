@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 
-const lightbg = "#F7F9FF";
+const lightbg = "#e0dcdc";
 const darkbg = "#20222F";
 const lightfont = "#F7F9FF";
 const darkfont = "#20222F";

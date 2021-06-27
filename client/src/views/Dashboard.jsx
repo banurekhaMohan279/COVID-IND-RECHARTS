@@ -3,6 +3,7 @@ import usePersistedState from "../utils/usePersistedState";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Carousel from "react-bootstrap/Carousel";
 import Select from "../components/Select.jsx";
 import BarChartComponent from "../components/Charts/BarChart";
 import OneDTable from "../components/1DTable";
@@ -43,6 +44,16 @@ function Dashboard() {
           <Col>
             <BarChartComponent data={data} />
           </Col>
+        </Row>
+        <Row className="justify-content-md-center">
+          <Carousel>
+            <Carousel.Item>
+              <LineChartComponent data={data} series={currentSeries} />{" "}
+            </Carousel.Item>
+            <Carousel.Item>
+              <BarChartComponent data={data} />
+            </Carousel.Item>
+          </Carousel>
         </Row>
       </>
     );
