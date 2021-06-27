@@ -7,22 +7,31 @@ import {
   LabelList,
   ResponsiveContainer
 } from "recharts";
-//import BarChartD3 from "./pureD3/BarChart/BarChart.jsx";
 
 export default function BarChartComponent(props) {
-  const featureImportance = props.featureImportance;
+  const data = props.data;
   let result = [];
-  if (featureImportance) {
-    for (const [key, value] of Object.entries(featureImportance)) {
-      if (value > 0) result.push({ index: key, value: value.toFixed(3) });
-    }
+  if (data) {
+    result = data.reduce(
+      (acc, item) => {
+        acc[0].value = (acc[0].value || 0) + Number(item.Male);
+        acc[1].value = (acc[1].value || 0) + Number(item.Female);
+        acc[2].value = (acc[2].value || 0) + Number(item.Transgender);
+        return acc;
+      },
+      [
+        { index: "Male", value: 0 },
+        { index: "Female", value: 0 },
+        { index: "Transgender", value: 0 }
+      ]
+    );
   }
 
   return (
     <>
       <ResponsiveContainer>
         <div className="area-chart-wrapper">
-          <h5> Feature Importance </h5>
+          <h5> Gender Vaccination ratio </h5>
           <BarChart
             width={400}
             height={400}

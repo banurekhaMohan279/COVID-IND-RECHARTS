@@ -40,6 +40,9 @@ function Dashboard() {
             {" "}
             <LineChartComponent data={data} series={currentSeries} />{" "}
           </Col>
+          <Col>
+            <BarChartComponent data={data} />
+          </Col>
         </Row>
       </>
     );
