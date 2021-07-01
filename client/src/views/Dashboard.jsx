@@ -37,6 +37,7 @@ function Dashboard() {
 
   /*Using reduce ion one common area*/
   function modifyData(data) {
+    console.log("data1", data[0]);
     let result = data.reduce(
       (acc, item) => {
         acc.doses[0].value = (acc.doses[0].value || 0) + Number(item.Male);
