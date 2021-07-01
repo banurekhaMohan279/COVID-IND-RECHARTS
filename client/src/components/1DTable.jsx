@@ -2,7 +2,6 @@ import Table from "react-bootstrap/Table";
 
 export default function OneDTable(props) {
   const { heading, header, data } = props;
-  console.log("data table", data);
 
   function displayBody() {
     if (data) {
