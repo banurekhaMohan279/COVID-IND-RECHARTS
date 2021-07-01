@@ -16,6 +16,7 @@ function Dashboard() {
     "India"
   );
   const [data, setData] = useState([]);
+  const [doses, setDoses] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   let urls = [
     `http://localhost:3002/data/${currentSeries}`
@@ -30,8 +31,49 @@ function Dashboard() {
       .then(results => {
         setData(results[0]);
         setIsLoading(false);
+        modifyData(results[0]);
       });
   }, [currentSeries]);
+
+  /*Using reduce ion one common area*/
+  function modifyData(data) {
+    let result = data.reduce(
+      (acc, item) => {
+        acc.doses[0].value = (acc.doses[0].value || 0) + Number(item.Male);
+        acc.doses[1].value = (acc.doses[1].value || 0) + Number(item.Female);
+        acc.doses[2].value =
+          (acc.doses[2].value || 0) + Number(item.Transgender);
+        acc.doseTypes[0].value =
+          (acc.doses[0].value || 0) + Number(item.Covaxin);
+        acc.doseTypes[1].value =
+          (acc.doses[1].value || 0) + Number(item.CovidShield);
+        acc.doseTypes[2].value =
+          (acc.doses[2].value || 0) + Number(item.Sputnik);
+        acc.doseStages[0].value =
+          (acc.doses[0].value || 0) + Number(item.Dose1);
+        acc.doseStages[1].value =
+          (acc.doses[1].value || 0) + Number(item.Dose2);
+        return acc;
+      },
+      {
+        doses: [
+          { index: "Male", value: 0 },
+          { index: "Female", value: 0 },
+          { index: "Transgender", value: 0 }
+        ],
+        doseTypes: [
+          { index: "Covaxin", value: 0 },
+          { index: "CovidShield", value: 0 },
+          { index: "Sputnik", value: 0 }
+        ],
+        doseStages: [
+          { index: "Dose 1", value: 0 },
+          { index: "Dose 2", value: 0 }
+        ]
+      }
+    );
+    setDoses(result);
+  }
 
   function LoadData() {
     return (
@@ -42,7 +84,23 @@ function Dashboard() {
             <LineChartComponent data={data} series={currentSeries} />{" "}
           </Col>
           <Col>
-            <BarChartComponent data={data} />
+            <BarChartComponent data={doses.doses} />
+          </Col>
+        </Row>
+        <Row>
+          <Col>
+            <OneDTable
+              heading="Vaccines Administered"
+              header={["Name", "Total doses"]}
+              data={doses.doseTypes}
+            />
+          </Col>
+          <Col>
+            <OneDTable
+              heading="Total number of doses Administered"
+              header={["Stage", "Total doses"]}
+              data={doses.doseStages}
+            />
           </Col>
         </Row>
         <Row className="justify-content-md-center">
@@ -51,7 +109,7 @@ function Dashboard() {
               <LineChartComponent data={data} series={currentSeries} />{" "}
             </Carousel.Item>
             <Carousel.Item>
-              <BarChartComponent data={data} />
+              <BarChartComponent data={doses.doses} />
             </Carousel.Item>
           </Carousel>
         </Row>

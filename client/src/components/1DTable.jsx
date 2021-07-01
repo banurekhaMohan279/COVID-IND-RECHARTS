@@ -2,14 +2,15 @@ import Table from "react-bootstrap/Table";
 
 export default function OneDTable(props) {
   const { heading, header, data } = props;
+  console.log("data table", data);
 
   function displayBody() {
     if (data) {
-      return Object.entries(data).map(([key, value]) => {
+      return data.map(item => {
         return (
-          <tr key={key.toString()}>
-            <td> {key} </td>
-            <td> {Number(value) ? value.toFixed(3) : value} </td>
+          <tr key={item.index.toString()}>
+            <td> {item.index} </td>
+            <td> {Number(item.value)} </td>
           </tr>
         );
       });

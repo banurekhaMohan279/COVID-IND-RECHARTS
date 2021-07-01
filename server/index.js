@@ -45,7 +45,10 @@ app.get("/data/:series", (req, res) => {
       Dose2: row["Second Dose Administered"],
       Male: row["Male(Individuals Vaccinated)"],
       Female: row["Female(Individuals Vaccinated)"],
-      Transgender: row["Transgender(Individuals Vaccinated)"]
+      Transgender: row["Transgender(Individuals Vaccinated)"],
+      Covaxin: row["Total Covaxin Administered"],
+      CovidShield: row["Total CoviShield Administered"],
+      Sputnik: row["Total Sputnik V Administered"]
     }))
   );
 });

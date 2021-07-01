@@ -21,7 +21,7 @@ export default function LineChartComponent(props) {
           width={400}
           height={400}
           data={data}
-          margin={{ top: 10, bottom: 10, left: 10, right: 30 }}
+          margin={{ top: 10, bottom: 10, left: 50, right: 30 }}
         >
           <CartesianGrid strokeDasharray="3 3" />
           <XAxis dataKey="date" />
