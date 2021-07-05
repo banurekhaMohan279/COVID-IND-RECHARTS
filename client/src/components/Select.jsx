@@ -21,7 +21,7 @@ const Select = props => {
             size="sm"
             custom
             onChange={handleChange}
-            defaultValue={series}
+            value={series}
           >
             {data.map(element => (
               <option key={element.toString()}>{element}</option>

@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 
-const useDataApi = (url, initialData, dependantOn) => {
+const useDataApi = (url, initialData) => {
   const cache = useRef({});
   const [data, setData] = useState(initialData);
   const [isLoading, setIsLoading] = useState(false);

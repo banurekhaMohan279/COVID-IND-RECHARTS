@@ -18,8 +18,7 @@ function Dashboard() {
   );
   const [data, isLoading] = useDataApi(
     `http://localhost:3002/data/${currentSeries}`,
-    [],
-    currentSeries
+    []
   );
   const [doses, setDoses] = useState({});
   useEffect(() => {
