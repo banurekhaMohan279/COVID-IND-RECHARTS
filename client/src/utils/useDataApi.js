@@ -1,9 +1,8 @@
 import { useState, useEffect, useRef } from "react";
 
-const useDataApi = (initialUrl, initialData) => {
+const useDataApi = (url, initialData, dependantOn) => {
   const cache = useRef({});
   const [data, setData] = useState(initialData);
-  const [url, setUrl] = useState(initialUrl);
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
 
@@ -29,9 +28,9 @@ const useDataApi = (initialUrl, initialData) => {
     };
 
     fetchData();
-  }, []);
+  }, [url]);
 
-  return [data, isLoading, isError, setUrl];
+  return [data, isLoading, isError];
 };
 
 export default useDataApi;

@@ -19,4 +19,9 @@ export const GlobalStyle = createGlobalStyle`
     color: ${props => (props.light ? darkfont : lightfont)};
   }
 
+  .disclaimer{
+    font-size: small;
+    text-align:right;
+  }
+
 `;

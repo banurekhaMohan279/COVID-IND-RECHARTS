@@ -1,41 +1,33 @@
 import { useEffect, useState } from "react";
 import usePersistedState from "../utils/usePersistedState";
+import useDataApi from "../utils/useDataApi";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Carousel from "react-bootstrap/Carousel";
 import Select from "../components/Select.jsx";
 import BarChartComponent from "../components/Charts/BarChart";
-import OneDTable from "../components/1DTable";
-import TwoDTable from "../components/2DTable";
 import LineChartComponent from "../components/Charts/LineChart";
+import OneDTable from "../components/1DTable";
+//import Carousel from "react-bootstrap/Carousel";
+//import TwoDTable from "../components/2DTable";
 
 function Dashboard() {
   const [currentSeries, setCurrentSeries] = usePersistedState(
     "currentSeries",
     "India"
   );
-  const [data, setData] = useState([]);
+  const [data, isLoading] = useDataApi(
+    `http://localhost:3002/data/${currentSeries}`,
+    [],
+    currentSeries
+  );
   const [doses, setDoses] = useState({});
-  const [isLoading, setIsLoading] = useState(false);
-  let urls = [
-    `http://localhost:3002/data/${currentSeries}`
-    //  `http://localhost:3002/results/${currentSeries}`
-  ];
-
   useEffect(() => {
-    setIsLoading(true);
-    let requests = urls.map(url => fetch(url));
-    Promise.all(requests)
-      .then(responses => Promise.all(responses.map(r => r.json())))
-      .then(results => {
-        setData(results[0]);
-        setIsLoading(false);
-        modifyData(results[0]);
-      });
-  }, [currentSeries]);
+    //modify data after data is changed by useDataApi
+    modifyData(data);
+  }, [data]);
 
-  /*Using reduce ion one common area*/
+  /*Using reduce in one common area*/
   function modifyData(data) {
     let result = data.reduce(
       (acc, item) => {
@@ -102,6 +94,14 @@ function Dashboard() {
             />
           </Col>
         </Row>
+        <Row>
+          <p className="disclaimer">
+            {data.length > 0
+              ? `* The following data is for dates ${data[0].date} to ${data[99].date}`
+              : ""}
+          </p>
+        </Row>
+        {/*
         <Row className="justify-content-md-center">
           <Carousel>
             <Carousel.Item>
@@ -112,6 +112,7 @@ function Dashboard() {
             </Carousel.Item>
           </Carousel>
         </Row>
+        */}
       </>
     );
   }
