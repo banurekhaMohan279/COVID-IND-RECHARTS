@@ -36,7 +36,7 @@
 
 ## About The Project
 
-<!--![Working Model](https://github.com/banurekhaMohan279/Portfolio-V1/blob/master/images/workingModel.gif)-->
+[Working Model](https://github.com/banurekhaMohan279/Portfolio-V1/blob/master/images/workingModel.gif)
 
 Feel free to fork it to showcase your work!
 
