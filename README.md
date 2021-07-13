@@ -35,7 +35,7 @@
 
 ## About The Project
 
-[Working Model](https://github.com/banurekhaMohan279/COVID-IND-RECHARTS/blob/main/workingmodel.gif)
+![Working Model](https://github.com/banurekhaMohan279/COVID-IND-RECHARTS/blob/main/workingmodel.gif)
 
 Feel free to fork it to showcase your work!
 
